@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>::: ยินดีต้อนรับสู่เว็บไซต์ นส.กฤติมา :::</title>
+</head>
+<body style="background-color: beige;">
+    <center>
+    <h1><mark>แนะนำตัว</mark></h1>
+    <img src="pic/me.jpg" height=300 width="300"><br>
+    <br><strong>รหัส:</strong>IT07
+    <br><strong>ชื่อ-นามสกุล:</strong> น.ส.กฤติมา ทินจันทร์
+    <br><strong>ชื่อเล่น:</strong> ฟ้า
+    <br><strong>สาขาวิชา:</strong> เทคโนโลยีสารสนเทศ
+    <br><strong>ภูมิลำเนา:</strong> อุดรธานี
+    <br><strong>Facebook:</strong> Krittima Tinjan
+    <br><strong>อีเมลล์:</strong>inverter186@gmail.com
+    <br><strong>อาชีพในฝัน:</strong> Vtuber
+    <hr>
+    <hr>
+    </center>
+    
+    <br><br>
+    <a href="https://www.facebook.com/profile.php?id=100026530490139&sk=about">
+        <img src="pic/Logo_de_Facebook.png"width="50"height="50">
+    </a>
+    <a href="https://www.udru.ac.th/">
+        <img src="pic/225px-LgUDRU.png" width="50" height="50">
+    </a>
+</body>
+</html>
