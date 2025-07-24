@@ -19,7 +19,7 @@ where (CategoryID = 1 and UnitPrice<=20)
 --5. ชื่อบริษัทลูกค้า ที่อยู่ใน ประเทศ USA ที่ไม่มีหมายเลข FAX  เรียงตามลำดับชื่อบริษัท
 select CompanyName
 from Customers
-where Fax IS NALL
+where Fax is null
 order by CompanyName
 --6. ต้องการข้อมูลลูกค้าที่ชื่อบริษัททมีคำว่า Com
 select *
