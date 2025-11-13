@@ -1,0 +1,46 @@
+img {
+    width: 200px;
+    height: 200px;
+    border-color: rgb(170, 87, 18);
+    border-style: solid;
+    border-radius: 80px;
+}
+img.redius80{
+    border-radius: 80px;
+}
+
+img.transparent01{
+    opacity: 0.1;
+}
+
+.blockstyle1{
+    background-color: cadetblue;
+    text-align: center;
+    font-family: sans-serif;
+    color: rgb(236, 200, 152);
+    border-style: double ;
+    border-color: brown;
+}
+.border1{
+    border-left: 8px solid;
+    border-style: groove;
+    border-color: chocolate;
+    background-color: rgb(44, 177, 146)      
+}
+
+.table, td, th {    
+    border: 8px solid #c70000;
+    border-color: rgb(86, 177, 145);
+    background-color: rgb(177, 220, 250);
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+    color: rgb(0, 100, 86);
+}
