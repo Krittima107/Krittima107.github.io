@@ -132,7 +132,7 @@
     <section id="profile">
         <h2>1. แนะนำตัว (Introduction)</h2>
         <center>
-            <img src="pic/me.jpg" height="250" width="250"
+            <img src="pic/Mee.jpg.jpg" height="250" width="250"
                 style="border-radius:50%; border:3px solid var(--primary-color);" alt="Profile Picture">
             <p>
                 <strong>สวัสดีค่ะ ฉันชื่อ นางสาวกฤติมา ทินจันทร์</strong><br>
@@ -183,20 +183,20 @@
 
         <div class="project-card">
             <h3>🎓 ใบประกาศนียบัตร</h3>
-            <a href="pic/Screenshot%202026-03-11%20194755.png" target="_blank">
-                <img src="pic/Screenshot%202026-03-11%20194755.png" alt="Certificate 1"
+            <a href="pic/cert1.png" target="_blank">
+                <img src="pic/cert1.png" alt="Certificate 1"
                     style="max-width:25%; border-radius:10px; border:2px solid var(--primary-color); box-shadow:0 4px 10px rgba(0,0,0,0.2);">
             </a>
-            <a href="pic/Screenshot%202025-10-01%20193406.png" target="_blank">
-                <img src="pic/Screenshot%202025-10-01%20193406.png" alt="Certificate 2"
+            <a href="pic/cert2.png" target="_blank">
+                <img src="pic/cert2.png" alt="Certificate 2"
                     style="max-width:25%; border-radius:10px; border:2px solid var(--primary-color); box-shadow:0 4px 10px rgba(0,0,0,0.2);">
             </a>
-            <a href="pic/Screenshot%202025-10-01%20193418.png" target="_blank">
-                <img src="pic/Screenshot%202025-10-01%20193418.png" alt="Certificate 3"
+            <a href="pic/cert3.png" target="_blank">
+                <img src="pic/cert3.png" alt="Certificate 3"
                     style="max-width:25%; border-radius:10px; border:2px solid var(--primary-color); box-shadow:0 4px 10px rgba(0,0,0,0.2);">
             </a>
-            <a href="pic/Screenshot%202025-10-01%20193436.png" target="_blank">
-                <img src="pic/Screenshot%202025-10-01%20193436.png" alt="Certificate 4"
+            <a href="pic/cert4.png" target="_blank">
+                <img src="pic/cert4.png" alt="Certificate 4"
                     style="max-width:25%; border-radius:10px; border:2px solid var(--primary-color); box-shadow:0 4px 10px rgba(0,0,0,0.2);">
             </a>
 
