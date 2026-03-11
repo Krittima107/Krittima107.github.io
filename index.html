@@ -7,24 +7,40 @@
     <title>Portfolio นักศึกษา | GitHub.io</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== Theme Variables (จากพาเลทสีที่ส่งมา) ===== */
+        /* ===== Theme Variables (จากพาเลทสีที่ส่งมา พร้อมปรับปรุงเพื่อความเข้ม) ===== */
         :root {
-            --bg-color: #fafafa;
-            /* สีพื้นหลังเว็บ (สีอ่อนให้อ่านง่าย) */
-            --text-color: #333333;
-            /* สีตัวหนังสือทั่วไป */
-            --primary-color: #355C7D;
-            /* สีน้ำเงินเข้ม */
-            --secondary-color: #F8B195;
-            /* สีพีช */
-            --accent-color: #F67280;
-            /* สีชมพูอมส้ม */
-            --link-color: #C06C84;
-            /* สีชมพูเข้ม */
-            --footer-bg: #6C5B7B;
-            /* สีม่วง */
-            --card-bg: #ffffff;
-            /* สีพื้นหลังการ์ด */
+            /* สีจากพาเลท */
+            --color-dark-blue: #355C7D;
+            --color-light-peach: #F8B195;
+            --color-pink-orange: #F67280;
+            --color-dark-pink: #C06C84;
+            --color-purple: #6C5B7B;
+
+            /* การนำไปใช้งาน */
+            --bg-color: var(--color-purple);
+            /* พื้นหลังเว็บหลัก */
+            --text-color: var(--color-light-peach);
+            /* สีข้อความทั่วไป */
+            --heading-color: var(--color-pink-orange);
+            /* สีหัวข้อ h1, h2 */
+            --link-color: var(--color-pink-orange);
+            /* สีลิงก์ */
+            --link-hover-color: var(--color-light-peach);
+            /* สีลิงก์เวลาชี้ */
+            --card-bg: var(--color-dark-blue);
+            /* สีพื้นหลังการ์ดเนื้อหา */
+            --card-border: var(--color-dark-pink);
+            /* สีขอบการ์ด */
+            --nav-bg: var(--color-dark-blue);
+            /* สีพื้นหลังแถบเมนู */
+            --nav-text: var(--color-light-peach);
+            /* สีข้อความเมนู */
+            --nav-hover-text: var(--color-pink-orange);
+            /* สีข้อความเมนูเวลาชี้ */
+            --footer-bg: var(--color-dark-blue);
+            /* สีพื้นหลัง Footer */
+            --footer-text: var(--color-light-peach);
+            /* สีข้อความ Footer */
         }
 
         /* ===== Global Style ===== */
@@ -37,94 +53,139 @@
         }
 
         header {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: var(--color-dark-blue);
+            color: var(--heading-color);
             text-align: center;
-            padding: 2.5rem 1rem;
+            padding: 3rem 1rem;
             position: relative;
         }
 
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+        }
+
         nav {
-            background: var(--secondary-color);
+            background: var(--nav-bg);
             text-align: center;
-            padding: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         nav a {
-            color: var(--primary-color);
-            /* สีข้อความเมนู */
+            color: var(--nav-text);
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 20px;
             font-weight: 700;
             transition: color 0.3s;
+            font-size: 1.1rem;
         }
 
         nav a:hover {
-            color: var(--accent-color);
-            /* สีเวลาเอาเมาส์ชี้เมนู */
+            color: var(--nav-hover-text);
         }
 
         section {
-            padding: 2.5rem 2rem 1rem 2rem;
-            max-width: 900px;
+            padding: 4rem 2rem 2rem 2rem;
+            max-width: 950px;
             margin: auto;
         }
 
         h2 {
-            color: var(--primary-color);
-            border-left: 6px solid var(--accent-color);
-            /* เส้นตกแต่งหน้าหัวข้อ */
-            padding-left: 12px;
+            color: var(--heading-color);
+            border-left: 8px solid var(--color-dark-pink);
+            padding-left: 15px;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
         }
 
         a {
             color: var(--link-color);
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s;
         }
 
         a:hover {
-            color: var(--accent-color);
+            color: var(--link-hover-color);
             text-decoration: underline;
         }
 
         .project-card {
             background: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-top: 3px solid var(--primary-color);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid var(--card-border);
+        }
+
+        .project-card h3 {
+            color: var(--heading-color);
+            margin-top: 0;
+            font-size: 1.8rem;
         }
 
         .skills-list {
             padding-left: 0;
+            margin-bottom: 0;
         }
 
         .skills-list li {
-            background: var(--secondary-color);
-            color: var(--primary-color);
+            background: var(--color-dark-pink);
+            color: white;
             display: inline-block;
-            margin: 5px;
-            padding: 6px 15px;
-            border-radius: 20px;
+            margin: 8px;
+            padding: 8px 20px;
+            border-radius: 25px;
             font-weight: 500;
+            font-size: 1rem;
         }
 
         footer {
             text-align: center;
             background: var(--footer-bg);
-            color: white;
-            padding: 1.5rem;
-            margin-top: 3rem;
+            color: var(--footer-text);
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* สำหรับหน้าจอขนาดเล็ก */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            nav a {
+                margin: 0 10px;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 3rem 1rem 1rem 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .project-card {
+                padding: 1.5rem;
+            }
+
+            .project-card h3 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Welcome</h1>
+        <h1>Welcome to My Portfolio</h1>
     </header>
 
     <nav>
@@ -138,92 +199,105 @@
     </nav>
 
     <section id="profile">
-        <h2>1. แนะนำตัว (Introduction)</h2>
-        <center>
-            <img src="pic/Mee.jpg" height="250" width="250"
-                style="border-radius:50%; border:4px solid var(--accent-color); object-fit: cover;"
-                alt="Profile Picture">
-            <p style="margin-top: 20px;">
-                <strong>สวัสดีค่ะ ฉันชื่อ นางสาวกฤติมา ทินจันทร์</strong><br>
-                <strong>รหัสนักศึกษา:</strong> 67040233107<br>
-                <strong>มหาวิทยาลัย:</strong> ราชภัฏอุดรธานี<br>
-                <strong>สาขา:</strong> เทคโนโลยีสารสนเทศ <br>
-                <strong>ชื่อเล่น:</strong> ฟ้า<br>
-                <strong>ภูมิลำเนา:</strong> อุดรธานี<br>
-                <strong>Facebook:</strong> <a href="https://web.facebook.com/krittima.tinjan" target="_blank">Krittima
-                    Tinjan</a><br>
-                <strong>อีเมล:</strong> <a href="mailto:inverter186@gmail.com">inverter186@gmail.com</a><br>
-                <strong>อาชีพในฝัน:</strong> Vtuber<br>
-                สนใจด้าน AI, Web Development และ Data Science
-            </p>
-        </center>
+        <div class="project-card">
+            <h2>1. แนะนำตัว (Introduction)</h2>
+            <center>
+                <img src="pic/Mee.jpg" height="280" width="280"
+                    style="border-radius:50%; border:6px solid var(--color-dark-pink); object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.5);"
+                    alt="Profile Picture">
+                <p style="margin-top: 30px; font-size: 1.2rem;">
+                    <strong>สวัสดีค่ะ ฉันชื่อ นางสาวกฤติมา ทินจันทร์</strong><br>
+                    <strong>รหัสนักศึกษา:</strong> 67040233107<br>
+                    <strong>มหาวิทยาลัย:</strong> ราชภัฏอุดรธานี<br>
+                    <strong>สาขา:</strong> เทคโนโลยีสารสนเทศ <br>
+                    <strong>ชื่อเล่น:</strong> ฟ้า<br>
+                    <strong>ภูมิลำเนา:</strong> อุดรธานี<br>
+                    <strong>Facebook:</strong> <a href="https://web.facebook.com/krittima.tinjan"
+                        target="_blank">Krittima
+                        Tinjan</a><br>
+                    <strong>อีเมล:</strong> <a href="mailto:inverter186@gmail.com">inverter186@gmail.com</a><br>
+                    <strong>อาชีพในฝัน:</strong> Vtuber<br>
+                    <span style="font-style: italic;">สนใจด้าน AI, Web Development และ Data Science</span>
+                </p>
+            </center>
+        </div>
     </section>
 
     <section id="skills">
-        <h2>2. ทักษะ (Skills)</h2>
-        <ul class="skills-list">
-            <li>Python</li>
-            <li>JavaScript</li>
-            <li>HTML/CSS</li>
-            <li>SQL</li>
-        </ul>
-        <p><strong>Soft Skills:</strong> การสื่อสาร, การทำงานเป็นทีม, การแก้ปัญหา</p>
+        <div class="project-card">
+            <h2>2. ทักษะ (Skills)</h2>
+            <ul class="skills-list">
+                <li>Python</li>
+                <li>JavaScript</li>
+                <li>HTML/CSS</li>
+                <li>SQL</li>
+            </ul>
+            <p style="margin-top: 20px;"><strong>Soft Skills:</strong> การสื่อสาร, การทำงานเป็นทีม, การแก้ปัญหา</p>
+        </div>
     </section>
 
     <section id="projects">
-        <h2>3. ผลงานที่ผ่านมา (Projects)</h2>
         <div class="project-card">
-            <h3 style="margin-top:0;">การออกแบบงาน Figma</h3>
+            <h2>3. ผลงานที่ผ่านมา (Projects)</h2>
+            <h3>การออกแบบงาน Figma</h3>
             <a href="https://www.figma.com/proto/LFGQIvZKt1IdQkpcy7uFz7/Project107?node-id=604-25&starting-point-node-id=604%3A25&t=LbxgDcxfliWIcaNk-1"
-                target="_blank">🔗 เปิดดูผลงานใน Figma</a>
+                target="_blank" style="font-size: 1.1rem;">🔗 เปิดดูผลงานใน Figma</a>
         </div>
     </section>
 
     <section id="education">
-        <h2>4. การศึกษา (Education)</h2>
-        <p><strong>ประถมศึกษา:</strong> โรงเรียนบ้านปากดงส่งเสริมธรรม (ป.1–ป.6)</p>
-        <p><strong>มัธยมศึกษา:</strong> โรงเรียนอุดรพิชัยรักษ์พิทยา (ม.1–ม.6)</p>
-        <p><strong>อุดมศึกษา:</strong> คณะวิทยาศาสตร์ สาขาเทคโนโลยีสารสนเทศ มหาวิทยาลัยราชภัฏอุดรธานี (2566–ปัจจุบัน)
-        </p>
+        <div class="project-card">
+            <h2>4. การศึกษา (Education)</h2>
+            <p><strong>ประถมศึกษา:</strong> โรงเรียนบ้านปากดงส่งเสริมธรรม (ป.1–ป.6)</p>
+            <p><strong>มัธยมศึกษา:</strong> โรงเรียนอุดรพิชัยรักษ์พิทยา (ม.1–ม.6)</p>
+            <p><strong>อุดมศึกษา:</strong> คณะวิทยาศาสตร์ สาขาเทคโนโลยีสารสนเทศ มหาวิทยาลัยราชภัฏอุดรธานี
+                (2566–ปัจจุบัน)
+            </p>
+        </div>
     </section>
 
     <section id="activities">
-        <h2>5. กิจกรรมและผลงานอื่น ๆ (Activities / Achievements)</h2>
-
         <div class="project-card">
-            <h3 style="margin-top:0; color: var(--primary-color);">🎓 ใบประกาศนียบัตร</h3>
-            <div style="text-align: center;">
+            <h2>5. กิจกรรมและผลงานอื่น ๆ (Activities / Achievements)</h2>
+            <h3>🎓 ใบประกาศนียบัตร</h3>
+            <div style="text-align: center; margin-top: 20px;">
                 <a href="pic/cert2.png" target="_blank">
                     <img src="pic/cert2.png" alt="Certificate 2"
-                        style="max-width:23%; margin: 5px; border-radius:8px; border:2px solid var(--secondary-color); box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                        style="max-width:30%; margin: 10px; border-radius:10px; border:3px solid var(--color-light-peach); box-shadow:0 4px 8px rgba(0,0,0,0.3);">
                 </a>
                 <a href="pic/cert3.png" target="_blank">
                     <img src="pic/cert3.png" alt="Certificate 3"
-                        style="max-width:23%; margin: 5px; border-radius:8px; border:2px solid var(--secondary-color); box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                        style="max-width:30%; margin: 10px; border-radius:10px; border:3px solid var(--color-light-peach); box-shadow:0 4px 8px rgba(0,0,0,0.3);">
                 </a>
                 <a href="pic/cert4.png" target="_blank">
                     <img src="pic/cert4.png" alt="Certificate 4"
-                        style="max-width:23%; margin: 5px; border-radius:8px; border:2px solid var(--secondary-color); box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                        style="max-width:30%; margin: 10px; border-radius:10px; border:3px solid var(--color-light-peach); box-shadow:0 4px 8px rgba(0,0,0,0.3);">
                 </a>
             </div>
-            <p style="font-size:0.9em; color:var(--text-color); text-align:center; margin-top: 15px;">
+            <p style="font-size:1em; color:var(--text-color); text-align:center; margin-top: 20px;">
                 (คลิกที่ภาพเพื่อดูขนาดเต็ม)</p>
         </div>
     </section>
 
     <section id="contact">
-        <h2>6. ติดต่อ (Contact)</h2>
-        <ul>
-            <li>Email: <a href="mailto:inverter186@gmail.com">inverter186@gmail.com</a></li>
-            <li>GitHub: <a href="https://github.com/Krittima107" target="_blank">github.com/Krittima107</a></li>
-            <li>Facebook: <a href="https://web.facebook.com/krittima.tinjan" target="_blank">Krittima Tinjan</a></li>
-        </ul>
+        <div class="project-card">
+            <h2>6. ติดต่อ (Contact)</h2>
+            <ul>
+                <li>Email: <a href="mailto:inverter186@gmail.com">inverter186@gmail.com</a></li>
+                <li>GitHub: <a href="https://github.com/Krittima107" target="_blank">github.com/Krittima107</a></li>
+                <li>Facebook: <a href="https://web.facebook.com/krittima.tinjan" target="_blank">Krittima Tinjan</a>
+                </li>
+            </ul>
+        </div>
     </section>
 
     <section id="career">
-        <h2>7. องค์ประกอบเสริม (Career Interests)</h2>
-        <p>มีเป้าหมายในอนาคตที่จะเป็นนักพัฒนาเว็บไซต์และคอนเทนต์ครีเอเตอร์ (Vtuber) ที่ใช้เทคโนโลยี AI
-            และกราฟิกขั้นสูงเพื่อสร้างสรรค์ผลงานที่สร้างแรงบันดาลใจให้กับผู้อื่น</p>
+        <div class="project-card">
+            <h2>7. องค์ประกอบเสริม (Career Interests)</h2>
+            <p style="font-size: 1.1rem;">มีเป้าหมายในอนาคตที่จะเป็นนักพัฒนาเว็บไซต์และคอนเทนต์ครีเอเตอร์ (Vtuber)
+                ที่ใช้เทคโนโลยี AI
+                และกราฟิกขั้นสูงเพื่อสร้างสรรค์ผลงานที่สร้างแรงบันดาลใจให้กับผู้อื่น</p>
+        </div>
     </section>
 
     <footer>
