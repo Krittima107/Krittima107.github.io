@@ -183,20 +183,20 @@
 
         <div class="project-card">
             <h3>🎓 ใบประกาศนียบัตร</h3>
-            <a href="pic/Screenshot 2026-03-11 194755.png" target="_blank">
-                <img src="pic/Screenshot 2026-03-11 194755.png" alt="Certificate 1"
+            <a href="pic/Screenshot%202026-03-11%20194755.png" target="_blank">
+                <img src="pic/Screenshot%202026-03-11%20194755.png" alt="Certificate 1"
                     style="max-width:25%; border-radius:10px; border:2px solid var(--primary-color); box-shadow:0 4px 10px rgba(0,0,0,0.2);">
             </a>
-            <a href="pic/Screenshot 2025-10-01 193406.png" target="_blank">
-                <img src="pic/Screenshot 2025-10-01 193406.png" alt="Certificate 2"
+            <a href="pic/Screenshot%202025-10-01%20193406.png" target="_blank">
+                <img src="pic/Screenshot%202025-10-01%20193406.png" alt="Certificate 2"
                     style="max-width:25%; border-radius:10px; border:2px solid var(--primary-color); box-shadow:0 4px 10px rgba(0,0,0,0.2);">
             </a>
-            <a href="pic/Screenshot 2025-10-01 193418.png" target="_blank">
-                <img src="pic/Screenshot 2025-10-01 193418.png" alt="Certificate 3"
+            <a href="pic/Screenshot%202025-10-01%20193418.png" target="_blank">
+                <img src="pic/Screenshot%202025-10-01%20193418.png" alt="Certificate 3"
                     style="max-width:25%; border-radius:10px; border:2px solid var(--primary-color); box-shadow:0 4px 10px rgba(0,0,0,0.2);">
             </a>
-            <a href="pic/Screenshot 2025-10-01 193436.png" target="_blank">
-                <img src="pic/Screenshot 2025-10-01 193436.png" alt="Certificate 4"
+            <a href="pic/Screenshot%202025-10-01%20193436.png" target="_blank">
+                <img src="pic/Screenshot%202025-10-01%20193436.png" alt="Certificate 4"
                     style="max-width:25%; border-radius:10px; border:2px solid var(--primary-color); box-shadow:0 4px 10px rgba(0,0,0,0.2);">
             </a>
 
