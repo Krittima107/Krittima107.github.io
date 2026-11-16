@@ -1,0 +1,676 @@
+/* =========================================================
+   TOKENS — Neon arcade palette (shared across every page)
+   ========================================================= */
+:root {
+    --bg: #0c0a1e;
+    --bg-glow: #1c1038;
+    --panel: #140f2b;
+    --line: #2a2250;
+    --text: #e4e1f7;
+    --text-dim: #9b93c4;
+
+    --green: #9dfb3c;
+    --cyan: #35e6f2;
+    --purple: #c86bff;
+    --orange: #ffb043;
+    --pink: #ff4fd1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(ellipse 900px 500px at 15% 0%, var(--bg-glow), transparent 60%),
+        radial-gradient(ellipse 900px 500px at 85% 10%, #2a1142, transparent 60%),
+        var(--bg);
+    color: var(--text);
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+}
+
+body.is-ready {
+    opacity: 1;
+}
+
+body.is-leaving {
+    opacity: 0;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Press Start 2P', monospace;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+a {
+    color: var(--cyan);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--cyan);
+}
+
+a:hover {
+    color: var(--pink);
+    border-color: var(--pink);
+}
+
+/* particle canvas sits behind everything */
+#bg-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    display: block;
+}
+
+/* cursor glow (desktop only, added by JS) */
+.cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(53, 230, 242, 0.55), transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: background 0.25s ease, transform 0.08s ease-out;
+    will-change: transform;
+}
+
+.deco {
+    position: absolute;
+    pointer-events: none;
+}
+
+.sq {
+    width: 14px;
+    height: 14px;
+}
+
+/* =========================================================
+   HEADER / NAV
+   ========================================================= */
+header.site-header {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 3.4rem 1.5rem 2.6rem;
+    border-bottom: 3px solid var(--purple);
+    box-shadow: 0 0 40px rgba(200, 107, 255, 0.25);
+}
+
+header.site-header .deco.sq:nth-of-type(1) {
+    top: 10%;
+    left: 6%;
+    background: var(--green);
+}
+
+header.site-header .deco.sq:nth-of-type(2) {
+    top: 20%;
+    left: 18%;
+    background: var(--orange);
+    transform: rotate(45deg);
+}
+
+header.site-header .deco.sq:nth-of-type(3) {
+    top: 14%;
+    right: 8%;
+    background: var(--purple);
+}
+
+header.site-header .deco.sq:nth-of-type(4) {
+    bottom: 16%;
+    right: 20%;
+    background: var(--green);
+}
+
+header.site-header .eyebrow {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: var(--orange);
+    margin-bottom: 1rem;
+}
+
+header.site-header h1 {
+    font-size: clamp(1.3rem, 4.2vw, 2.4rem);
+    color: #fff;
+    text-shadow: 0 0 10px var(--cyan), 0 0 24px rgba(53, 230, 242, 0.5);
+}
+
+header.site-header p.subtitle {
+    margin-top: 1rem;
+    color: var(--text-dim);
+    font-size: 1.02rem;
+}
+
+nav.site-nav {
+    background: var(--panel);
+    border-bottom: 2px solid var(--line);
+    padding: 0.7rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem 1.3rem;
+    flex-wrap: wrap;
+}
+
+nav.site-nav .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem 1.3rem;
+}
+
+nav.site-nav a {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.62rem;
+    color: var(--text);
+    border-bottom: none;
+    padding: 0.4rem 0.3rem;
+    position: relative;
+}
+
+nav.site-nav a:hover {
+    color: var(--green);
+    text-shadow: 0 0 8px var(--green);
+}
+
+nav.site-nav a.active {
+    color: var(--pink);
+}
+
+nav.site-nav a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background: var(--pink);
+    box-shadow: 0 0 8px var(--pink);
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: 2px solid var(--line);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+}
+
+/* =========================================================
+   LAYOUT — Neon panels
+   ========================================================= */
+main {
+    padding: 3.2rem 1.2rem 1rem;
+    max-width: 880px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.panel {
+    background: var(--panel);
+    border: 2px solid var(--accent, var(--cyan));
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+        0 0 26px -6px var(--accent, var(--cyan));
+    padding: 2.1rem 2.2rem;
+    margin-bottom: 1.6rem;
+}
+
+h2.title {
+    font-size: 1.1rem;
+    color: var(--accent, var(--cyan));
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px dashed var(--line);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+h2.title .dot {
+    width: 10px;
+    height: 10px;
+    background: var(--accent, var(--cyan));
+    box-shadow: 0 0 8px var(--accent, var(--cyan));
+    flex: none;
+}
+
+.accent-cyan {
+    --accent: var(--cyan);
+}
+
+.accent-green {
+    --accent: var(--green);
+}
+
+.accent-purple {
+    --accent: var(--purple);
+}
+
+.accent-orange {
+    --accent: var(--orange);
+}
+
+.accent-pink {
+    --accent: var(--pink);
+}
+
+/* scroll-reveal (JS adds .in-view when a .reveal element enters the viewport) */
+.reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   STAGE SELECT (home page grid)
+   ========================================================= */
+.stage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1.1rem;
+}
+
+.stage-card {
+    display: block;
+    background: var(--panel);
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    padding: 1.3rem 1.2rem;
+    text-align: left;
+    border-bottom-style: solid;
+}
+
+.stage-card .num {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    color: var(--accent, var(--cyan));
+    display: block;
+    margin-bottom: 0.6rem;
+}
+
+.stage-card h3 {
+    font-size: 0.85rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.stage-card p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    margin: 0;
+}
+
+.stage-card {
+    border-color: var(--accent, var(--line));
+    box-shadow: 0 0 0px -2px var(--accent, transparent);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.stage-card:hover {
+    box-shadow: 0 0 24px -4px var(--accent, var(--cyan));
+    transform: translateY(-4px);
+}
+
+/* =========================================================
+   PROFILE — Player card
+   ========================================================= */
+.card {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.avatar-frame {
+    flex: 0 0 170px;
+    text-align: center;
+}
+
+.avatar-frame img {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 3px solid var(--cyan);
+    box-shadow: 0 0 22px -4px var(--cyan);
+}
+
+.class-tag {
+    margin-top: 0.8rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    color: var(--pink);
+}
+
+.stat-list {
+    flex: 1 1 320px;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.stat-row span.label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+    align-self: center;
+}
+
+.stat-row span.value {
+    text-align: right;
+    font-weight: 600;
+}
+
+.flavor-text {
+    margin-top: 1.3rem;
+    color: var(--text-dim);
+    border-left: 3px solid var(--purple);
+    padding-left: 1rem;
+    font-style: italic;
+}
+
+/* =========================================================
+   SKILLS — Loadout grid + animated bars
+   ========================================================= */
+.inventory {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.inventory li {
+    background: rgba(157, 251, 60, 0.08);
+    border: 2px solid var(--green);
+    color: var(--green);
+    border-radius: 6px;
+    padding: 0.6rem 1.1rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.68rem;
+}
+
+.passives {
+    margin-top: 1.7rem;
+}
+
+.passives h3 {
+    font-size: 0.72rem;
+    color: var(--green);
+    margin-bottom: 0.7rem;
+}
+
+.passives ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.passives li {
+    margin-bottom: 0.35rem;
+}
+
+.skill-bar {
+    margin-bottom: 1rem;
+}
+
+.skill-bar .skill-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 0.35rem;
+}
+
+.skill-bar .track {
+    height: 10px;
+    background: var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.skill-bar .fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+    box-shadow: 0 0 10px var(--cyan);
+    transition: width 1.1s ease;
+}
+
+/* =========================================================
+   PROJECTS — Game log
+   ========================================================= */
+.quest {
+    border: 2px solid var(--line);
+    border-radius: 8px;
+    background: rgba(200, 107, 255, 0.06);
+    padding: 1.15rem 1.4rem;
+    margin-bottom: 1.1rem;
+}
+
+.quest h3 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 0.4rem;
+}
+
+.quest .status {
+    display: inline-block;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.58rem;
+    color: #10081d;
+    background: var(--purple);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 0.6rem;
+}
+
+/* =========================================================
+   EDUCATION — Level progression
+   ========================================================= */
+.levels {
+    border-left: 3px solid var(--orange);
+    padding-left: 1.5rem;
+}
+
+.level-step {
+    margin-bottom: 1.4rem;
+    position: relative;
+}
+
+.level-step::before {
+    content: "";
+    position: absolute;
+    left: -2.05rem;
+    top: 0.3rem;
+    width: 14px;
+    height: 14px;
+    background: var(--orange);
+    box-shadow: 0 0 10px var(--orange);
+    border-radius: 3px;
+}
+
+.level-step .lvl {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.62rem;
+    color: var(--orange);
+}
+
+.level-step p {
+    margin: 0.3rem 0 0;
+}
+
+/* =========================================================
+   ACHIEVEMENTS — Trophy room
+   ========================================================= */
+.trophies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+}
+
+.trophy img {
+    width: 200px;
+    /* ปรับความกว้างได้ตามต้องการ */
+    height: 140px;
+    /* ล็อกความสูงให้เท่ากันทุกรูป */
+    object-fit: cover;
+    /* ภาพจะครอปให้เต็มกรอบพอดีโดยไม่เสียสัดส่วน */
+    border-radius: 8px;
+    border: 3px solid var(--pink);
+    box-shadow: 0 0 18px -4px var(--pink);
+    transition: transform 0.3s ease;
+}
+
+.trophy:hover img {
+    transform: scale(1.05) rotate(-1deg);
+}
+
+.trophy-note {
+    text-align: center;
+    margin-top: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+}
+
+/* =========================================================
+   CONTACT — Add friend + next level banner
+   ========================================================= */
+.missive ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.missive li {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.seal {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: var(--cyan);
+    box-shadow: 0 0 6px var(--cyan);
+    margin-right: 0.6rem;
+}
+
+.next-level {
+    background: linear-gradient(135deg, rgba(200, 107, 255, 0.14), rgba(53, 230, 242, 0.1));
+    border: 2px solid var(--purple);
+    border-radius: 10px;
+    padding: 1.7rem 1.8rem;
+    text-align: center;
+}
+
+.next-level .eyebrow {
+    display: block;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    color: var(--purple);
+    margin-bottom: 0.8rem;
+}
+
+footer.site-footer {
+    text-align: center;
+    padding: 2.4rem 1rem 3rem;
+    color: var(--text-dim);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+}
+
+@media (max-width: 680px) {
+    .nav-toggle {
+        display: inline-block;
+    }
+
+    nav.site-nav {
+        justify-content: space-between;
+    }
+
+    nav.site-nav .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0.4rem;
+        padding-top: 0.6rem;
+    }
+
+    nav.site-nav .nav-links.open {
+        display: flex;
+    }
+
+    .panel {
+        padding: 1.5rem 1.4rem;
+    }
+
+    .card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .stat-row {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .stat-row span.value {
+        text-align: left;
+    }
+
+    .cursor-glow {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

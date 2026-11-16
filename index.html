@@ -4,309 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio นักศึกษา | GitHub.io</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        /* ===== Theme Variables (จากพาเลทสีที่ส่งมา พร้อมปรับปรุงเพื่อความเข้ม) ===== */
-        :root {
-            /* สีจากพาเลท */
-            --color-dark-blue: #355C7D;
-            --color-light-peach: #F8B195;
-            --color-pink-orange: #F67280;
-            --color-dark-pink: #C06C84;
-            --color-purple: #6C5B7B;
-
-            /* การนำไปใช้งาน */
-            --bg-color: var(--color-purple);
-            /* พื้นหลังเว็บหลัก */
-            --text-color: var(--color-light-peach);
-            /* สีข้อความทั่วไป */
-            --heading-color: var(--color-pink-orange);
-            /* สีหัวข้อ h1, h2 */
-            --link-color: var(--color-pink-orange);
-            /* สีลิงก์ */
-            --link-hover-color: var(--color-light-peach);
-            /* สีลิงก์เวลาชี้ */
-            --card-bg: var(--color-dark-blue);
-            /* สีพื้นหลังการ์ดเนื้อหา */
-            --card-border: var(--color-dark-pink);
-            /* สีขอบการ์ด */
-            --nav-bg: var(--color-dark-blue);
-            /* สีพื้นหลังแถบเมนู */
-            --nav-text: var(--color-light-peach);
-            /* สีข้อความเมนู */
-            --nav-hover-text: var(--color-pink-orange);
-            /* สีข้อความเมนูเวลาชี้ */
-            --footer-bg: var(--color-dark-blue);
-            /* สีพื้นหลัง Footer */
-            --footer-text: var(--color-light-peach);
-            /* สีข้อความ Footer */
-        }
-
-        /* ===== Global Style ===== */
-        body {
-            font-family: 'Kanit', sans-serif;
-            margin: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: var(--color-dark-blue);
-            color: var(--heading-color);
-            text-align: center;
-            padding: 3rem 1rem;
-            position: relative;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 3rem;
-        }
-
-        nav {
-            background: var(--nav-bg);
-            text-align: center;
-            padding: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav a {
-            color: var(--nav-text);
-            text-decoration: none;
-            margin: 0 20px;
-            font-weight: 700;
-            transition: color 0.3s;
-            font-size: 1.1rem;
-        }
-
-        nav a:hover {
-            color: var(--nav-hover-text);
-        }
-
-        section {
-            padding: 4rem 2rem 2rem 2rem;
-            max-width: 950px;
-            margin: auto;
-        }
-
-        h2 {
-            color: var(--heading-color);
-            border-left: 8px solid var(--color-dark-pink);
-            padding-left: 15px;
-            margin-bottom: 2rem;
-            font-size: 2.2rem;
-        }
-
-        a {
-            color: var(--link-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        a:hover {
-            color: var(--link-hover-color);
-            text-decoration: underline;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 2px solid var(--card-border);
-        }
-
-        .project-card h3 {
-            color: var(--heading-color);
-            margin-top: 0;
-            font-size: 1.8rem;
-        }
-
-        .skills-list {
-            padding-left: 0;
-            margin-bottom: 0;
-        }
-
-        .skills-list li {
-            background: var(--color-dark-pink);
-            color: white;
-            display: inline-block;
-            margin: 8px;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: 500;
-            font-size: 1rem;
-        }
-
-        footer {
-            text-align: center;
-            background: var(--footer-bg);
-            color: var(--footer-text);
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        /* สำหรับหน้าจอขนาดเล็ก */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2rem;
-            }
-
-            nav a {
-                margin: 0 10px;
-                font-size: 1rem;
-            }
-
-            section {
-                padding: 3rem 1rem 1rem 1rem;
-            }
-
-            h2 {
-                font-size: 1.8rem;
-            }
-
-            .project-card {
-                padding: 1.5rem;
-            }
-
-            .project-card h3 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <title>Krittima Tinjan — Start</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Chakra+Petch:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <header>
-        <h1>Welcome to My Portfolio</h1>
+    <canvas id="bg-canvas"></canvas>
+
+    <header class="site-header">
+        <span class="deco sq"></span><span class="deco sq"></span><span class="deco sq"></span><span
+            class="deco sq"></span>
+        <div class="eyebrow">WELCOME, PLAYER ONE</div>
+        <h1 data-type="KRITTIMA TINJAN">KRITTIMA TINJAN</h1>
+        <p class="subtitle">นักเดินทางสายเทคโนโลยีสารสนเทศ · มหาวิทยาลัยราชภัฏอุดรธานี</p>
     </header>
 
-    <nav>
-        <a href="#profile">โปรไฟล์</a>
-        <a href="#skills">ทักษะ</a>
-        <a href="#projects">ผลงาน</a>
-        <a href="#education">การศึกษา</a>
-        <a href="#activities">กิจกรรม</a>
-        <a href="#contact">ติดต่อ</a>
-        <a href="#career">เป้าหมาย</a>
+    <nav class="site-nav">
+        <button class="nav-toggle" aria-label="เปิดเมนู">MENU</button>
+        <div class="nav-links">
+            <a href="index.html">START</a>
+            <a href="player.html">PLAYER</a>
+            <a href="loadout.html">LOADOUT</a>
+            <a href="game-log.html">GAME LOG</a>
+            <a href="level-up.html">LEVEL UP</a>
+            <a href="trophies.html">TROPHIES</a>
+            <a href="contact.html">ADD FRIEND</a>
+        </div>
     </nav>
 
-    <section id="profile">
-        <div class="project-card">
-            <h2>1. แนะนำตัว (Introduction)</h2>
-            <center>
-                <img src="pic/Mee.jpg" height="280" width="280"
-                    style="border-radius:50%; border:6px solid var(--color-dark-pink); object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.5);"
-                    alt="Profile Picture">
-                <p style="margin-top: 30px; font-size: 1.2rem;">
-                    <strong>สวัสดีค่ะ ฉันชื่อ นางสาวกฤติมา ทินจันทร์</strong><br>
-                    <strong>รหัสนักศึกษา:</strong> 67040233107<br>
-                    <strong>มหาวิทยาลัย:</strong> ราชภัฏอุดรธานี<br>
-                    <strong>สาขา:</strong> เทคโนโลยีสารสนเทศ <br>
-                    <strong>ชื่อเล่น:</strong> ฟ้า<br>
-                    <strong>ภูมิลำเนา:</strong> อุดรธานี<br>
-                    <strong>Facebook:</strong> <a href="https://web.facebook.com/krittima.tinjan"
-                        target="_blank">Krittima
-                        Tinjan</a><br>
-                    <strong>อีเมล:</strong> <a href="mailto:inverter186@gmail.com">inverter186@gmail.com</a><br>
-                    <strong>อาชีพในฝัน:</strong> Vtuber<br>
-                    <span style="font-style: italic;">สนใจด้าน AI, Web Development และ Data Science</span>
-                </p>
-            </center>
-        </div>
-    </section>
-
-    <section id="skills">
-        <div class="project-card">
-            <h2>2. ทักษะ (Skills)</h2>
-            <ul class="skills-list">
-                <li>Python</li>
-                <li>JavaScript</li>
-                <li>HTML/CSS</li>
-                <li>SQL</li>
-            </ul>
-            <p style="margin-top: 20px;"><strong>Soft Skills:</strong> การสื่อสาร, การทำงานเป็นทีม, การแก้ปัญหา</p>
-        </div>
-    </section>
-
-    <section id="projects">
-        <div class="project-card">
-            <h2>3. ผลงานที่ผ่านมา (Projects)</h2>
-            <h3>การออกแบบงาน Figma</h3>
-            <a href="https://www.figma.com/proto/LFGQIvZKt1IdQkpcy7uFz7/Project107?node-id=604-25&starting-point-node-id=604%3A25&t=LbxgDcxfliWIcaNk-1"
-                target="_blank" style="font-size: 1.1rem;">🔗 เปิดดูผลงานใน Figma</a>
-            <h3>เว็บไซต์เมนูคาเฟ่(ทำกับเพื่อน)</h3>
-            <a href="https://hosting.udru.ac.th/~it67040233107/Cafe_Project/index1.php" target="_blank"
-                style="font-size: 1.1rem;">🔗 เปิดดูเว็บไซต์</a>
-        </div>
-    </section>
-
-    <section id="education">
-        <div class="project-card">
-            <h2>4. การศึกษา (Education)</h2>
-            <p><strong>ประถมศึกษา:</strong> โรงเรียนบ้านปากดงส่งเสริมธรรม (ป.1–ป.6)</p>
-            <p><strong>มัธยมศึกษา:</strong> โรงเรียนอุดรพิชัยรักษ์พิทยา (ม.1–ม.6)</p>
-            <p><strong>อุดมศึกษา:</strong> คณะวิทยาศาสตร์ สาขาเทคโนโลยีสารสนเทศ มหาวิทยาลัยราชภัฏอุดรธานี
-                (2566–ปัจจุบัน)
-            </p>
-        </div>
-    </section>
-
-    <section id="activities">
-        <div class="project-card">
-            <h2>5. กิจกรรมและผลงานอื่น ๆ (Activities / Achievements)</h2>
-            <h3>🎓 ใบประกาศนียบัตร</h3>
-            <div style="text-align: center; margin-top: 20px;">
-                <a href="pic/cert2.png" target="_blank">
-                    <img src="pic/cert2.png" alt="Certificate 2"
-                        style="max-width:30%; margin: 10px; border-radius:10px; border:3px solid var(--color-light-peach); box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+    <main>
+        <div class="panel accent-cyan">
+            <h2 class="title"><span class="dot"></span>SELECT YOUR STAGE</h2>
+            <p style="color:var(--text-dim); margin-top:-0.6rem;">เลือกด่านที่อยากสำรวจ —
+                แต่ละหน้าคือข้อมูลอีกด้านของตัวละครนี้</p>
+            <div class="stage-grid" style="margin-top:1.4rem;">
+                <a class="stage-card accent-cyan" href="player.html">
+                    <span class="num">STAGE 1</span>
+                    <h3>PLAYER CARD</h3>
+                    <p>ข้อมูลตัวละครและโปรไฟล์</p>
                 </a>
-                <a href="pic/cert3.png" target="_blank">
-                    <img src="pic/cert3.png" alt="Certificate 3"
-                        style="max-width:30%; margin: 10px; border-radius:10px; border:3px solid var(--color-light-peach); box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+                <a class="stage-card accent-green" href="loadout.html">
+                    <span class="num">STAGE 2</span>
+                    <h3>LOADOUT</h3>
+                    <p>ทักษะและความสามารถติดตัว</p>
                 </a>
-                <a href="pic/cert4.png" target="_blank">
-                    <img src="pic/cert4.png" alt="Certificate 4"
-                        style="max-width:30%; margin: 10px; border-radius:10px; border:3px solid var(--color-light-peach); box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+                <a class="stage-card accent-purple" href="game-log.html">
+                    <span class="num">STAGE 3</span>
+                    <h3>GAME LOG</h3>
+                    <p>ผลงานและโปรเจกต์ที่ผ่านมา</p>
+                </a>
+                <a class="stage-card accent-orange" href="level-up.html">
+                    <span class="num">STAGE 4</span>
+                    <h3>LEVEL UP</h3>
+                    <p>เส้นทางการศึกษา</p>
+                </a>
+                <a class="stage-card accent-pink" href="trophies.html">
+                    <span class="num">STAGE 5</span>
+                    <h3>TROPHIES</h3>
+                    <p>ใบประกาศนียบัตรและความสำเร็จ</p>
+                </a>
+                <a class="stage-card accent-cyan" href="contact.html">
+                    <span class="num">STAGE 6</span>
+                    <h3>ADD FRIEND</h3>
+                    <p>ช่องทางติดต่อและเป้าหมายถัดไป</p>
                 </a>
             </div>
-            <p style="font-size:1em; color:var(--text-color); text-align:center; margin-top: 20px;">
-                (คลิกที่ภาพเพื่อดูขนาดเต็ม)</p>
         </div>
-    </section>
+    </main>
 
-    <section id="contact">
-        <div class="project-card">
-            <h2>6. ติดต่อ (Contact)</h2>
-            <ul>
-                <li>Email: <a href="mailto:inverter186@gmail.com">inverter186@gmail.com</a></li>
-                <li>GitHub: <a href="https://github.com/Krittima107" target="_blank">github.com/Krittima107</a></li>
-                <li>Facebook: <a href="https://web.facebook.com/krittima.tinjan" target="_blank">Krittima Tinjan</a>
-                </li>
-            </ul>
-        </div>
-    </section>
+    <footer class="site-footer">© 2026 KRITTIMA TINJAN · GITHUB PAGES</footer>
 
-    <section id="career">
-        <div class="project-card">
-            <h2>7. องค์ประกอบเสริม (Career Interests)</h2>
-            <p style="font-size: 1.1rem;">มีเป้าหมายในอนาคตที่จะเป็นนักพัฒนาเว็บไซต์และคอนเทนต์ครีเอเตอร์ (Vtuber)
-                ที่ใช้เทคโนโลยี AI
-                และกราฟิกขั้นสูงเพื่อสร้างสรรค์ผลงานที่สร้างแรงบันดาลใจให้กับผู้อื่น</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2026 Krittima Tinjan | สร้างด้วย ❤️ บน GitHub Pages</p>
-    </footer>
-
+    <script src="js/main.js"></script>
 </body>
 
 </html>
