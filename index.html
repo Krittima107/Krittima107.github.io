@@ -74,11 +74,219 @@
                 </a>
             </div>
         </div>
+
+
+
+        <!-- กล่องมินิเกม Neon Pac-Mini -->
+        <div class="panel accent-pink" style="margin-top: 2rem; text-align: center;">
+            <h2 class="title"><span class="dot"></span>MINI ARCADE: NEON PAC</h2>
+
+            <div class="game-hud">
+                <span>SCORE: <strong id="pac-score">0</strong></span>
+                <span id="pac-status">ใช้ปุ่มลูกศร ⬆️⬇️⬅️➡️ หรือ WASD เพื่อเดิน</span>
+            </div>
+
+            <canvas id="pacman-canvas" width="380" height="220"></canvas>
+
+            <!-- ปุ่มควบคุมสำหรับหน้าจอมือถือ หรือใช้เมาส์คลิก -->
+            <div class="pac-controls">
+                <button type="button" onclick="movePac(0, -1)">▲</button>
+                <div>
+                    <button type="button" onclick="movePac(-1, 0)">◀</button>
+                    <button type="button" onclick="resetPacGame()" class="reset-btn">RESET</button>
+                    <button type="button" onclick="movePac(1, 0)">▶</button>
+                </div>
+                <button type="button" onclick="movePac(0, 1)">▼</button>
+            </div>
+        </div>
     </main>
 
     <footer class="site-footer">© 2026 KRITTIMA TINJAN · GITHUB PAGES</footer>
 
     <script src="js/main.js"></script>
+
+    <script>
+        const pacCanvas = document.getElementById('pacman-canvas');
+        if (pacCanvas) {
+            const ctx = pacCanvas.getContext('2d');
+            const scoreEl = document.getElementById('pac-score');
+            const statusEl = document.getElementById('pac-status');
+
+            const tileSize = 20;
+            // แผนที่: 1 = กำแพง, 0 = จุดคะแนน, 2 = ทางว่าง
+            const initialMap = [
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+                [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+                [1, 0, 1, 0, 1, 1, 0, 1, 1, 2, 1, 1, 0, 1, 1, 0, 1, 0, 1],
+                [1, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 1],
+                [1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1],
+                [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+                [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+                [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            ];
+
+            let map, pacman, ghost, score, totalDots, gameOver, mouthOpen;
+
+            function initPacGame() {
+                map = initialMap.map(row => [...row]);
+                pacman = { x: 1, y: 1, dx: 0, dy: 0, angle: 0.2 };
+                ghost = { x: 9, y: 5, dx: 0, dy: -1 };
+                score = 0;
+                gameOver = false;
+                mouthOpen = true;
+                scoreEl.innerText = score;
+                statusEl.innerText = "ใช้ปุ่มลูกศร ⬆️⬇️⬅️➡️ หรือ WASD เพื่อเดิน";
+                statusEl.style.color = "#ffffff";
+
+                totalDots = 0;
+                for (let r = 0; r < map.length; r++) {
+                    for (let c = 0; c < map[r].length; c++) {
+                        if (map[r][c] === 0) totalDots++;
+                    }
+                }
+                drawPacGame();
+            }
+
+            function movePac(dx, dy) {
+                if (gameOver) return;
+                const nextX = pacman.x + dx;
+                const nextY = pacman.y + dy;
+
+                if (map[nextY] && map[nextY][nextX] !== 1) {
+                    pacman.x = nextX;
+                    pacman.y = nextY;
+                    mouthOpen = !mouthOpen;
+
+                    // คำนวณทิศทางการหันหน้า
+                    if (dx === 1) pacman.angle = 0;
+                    if (dx === -1) pacman.angle = Math.PI;
+                    if (dy === -1) pacman.angle = Math.PI * 1.5;
+                    if (dy === 1) pacman.angle = Math.PI * 0.5;
+
+                    // เก็บจุด
+                    if (map[nextY][nextX] === 0) {
+                        map[nextY][nextX] = 2;
+                        score += 10;
+                        totalDots--;
+                        scoreEl.innerText = score;
+
+                        if (totalDots === 0) {
+                            gameOver = true;
+                            statusEl.innerText = "🎉 YOU WIN! เก็บครบทุกจุดแล้ว!";
+                            statusEl.style.color = "#00ffcc";
+                        }
+                    }
+                }
+                checkCollision();
+                drawPacGame();
+            }
+
+            function updateGhost() {
+                if (gameOver) return;
+                const dirs = [
+                    { dx: 0, dy: -1 }, { dx: 0, dy: 1 },
+                    { dx: -1, dy: 0 }, { dx: 1, dy: 0 }
+                ];
+                // สุ่มทิศทางที่เดินได้ (ไม่ชนกำแพง)
+                const validDirs = dirs.filter(d => map[ghost.y + d.dy][ghost.x + d.dx] !== 1);
+
+                // พยายามไม่เดินย้อนกลับทางเดิมทันทีถ้ามีทางอื่น
+                const forwardDirs = validDirs.filter(d => !(d.dx === -ghost.dx && d.dy === -ghost.dy));
+                const chosen = (forwardDirs.length > 0 ? forwardDirs : validDirs)[Math.floor(Math.random() * (forwardDirs.length || validDirs.length))];
+
+                if (chosen) {
+                    ghost.x += chosen.dx;
+                    ghost.y += chosen.dy;
+                    ghost.dx = chosen.dx;
+                    ghost.dy = chosen.dy;
+                }
+                checkCollision();
+                drawPacGame();
+            }
+
+            function checkCollision() {
+                if (pacman.x === ghost.x && pacman.y === ghost.y) {
+                    gameOver = true;
+                    statusEl.innerText = "💀 GAME OVER! โดนผีจับได้ กด RESET เพื่อเริ่มใหม่";
+                    statusEl.style.color = "#ff2a85";
+                }
+            }
+
+            function drawPacGame() {
+                ctx.clearRect(0, 0, pacCanvas.width, pacCanvas.height);
+
+                // วาดแผนที่และจุด
+                for (let r = 0; r < map.length; r++) {
+                    for (let c = 0; c < map[r].length; c++) {
+                        if (map[r][c] === 1) {
+                            ctx.fillStyle = '#261447';
+                            ctx.strokeStyle = '#ff2a85';
+                            ctx.lineWidth = 1;
+                            ctx.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
+                            ctx.strokeRect(c * tileSize, r * tileSize, tileSize, tileSize);
+                        } else if (map[r][c] === 0) {
+                            ctx.fillStyle = '#00ffff';
+                            ctx.beginPath();
+                            ctx.arc(c * tileSize + tileSize / 2, r * tileSize + tileSize / 2, 3, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+                }
+
+                // วาดตัว Pac-Man (สีเหลืองนีออน)
+                ctx.save();
+                ctx.translate(pacman.x * tileSize + tileSize / 2, pacman.y * tileSize + tileSize / 2);
+                ctx.rotate(pacman.angle);
+                ctx.fillStyle = '#ffee00';
+                ctx.beginPath();
+                const mouth = mouthOpen ? 0.22 * Math.PI : 0.02 * Math.PI;
+                ctx.arc(0, 0, tileSize / 2 - 2, mouth, Math.PI * 2 - mouth);
+                ctx.lineTo(0, 0);
+                ctx.fill();
+                ctx.restore();
+
+                // วาดตัวผี (สีชมพูแสด)
+                const gx = ghost.x * tileSize + tileSize / 2;
+                const gy = ghost.y * tileSize + tileSize / 2;
+                ctx.fillStyle = '#ff0055';
+                ctx.beginPath();
+                ctx.arc(gx, gy - 2, tileSize / 2 - 2, Math.PI, 0, false);
+                ctx.lineTo(gx + tileSize / 2 - 2, gy + tileSize / 2 - 2);
+                ctx.lineTo(gx - tileSize / 2 + 2, gy + tileSize / 2 - 2);
+                ctx.closePath();
+                ctx.fill();
+
+                // ตาผี
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(gx - 3, gy - 3, 2, 0, Math.PI * 2);
+                ctx.arc(gx + 3, gy - 3, 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // รับค่าจากแป้นพิมพ์
+            window.addEventListener('keydown', (e) => {
+                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                    e.preventDefault(); // ป้องกันหน้าเว็บเลื่อนขึ้นลงเวลาเล่น
+                }
+                if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') movePac(0, -1);
+                if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') movePac(0, 1);
+                if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') movePac(-1, 0);
+                if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') movePac(1, 0);
+            });
+
+            window.resetPacGame = initPacGame;
+            window.movePac = movePac;
+
+            initPacGame();
+            // ให้ผีขยับทุกๆ 0.45 วินาที
+            setInterval(updateGhost, 450);
+        }
+    </script>
+
 </body>
 
 </html>
