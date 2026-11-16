@@ -744,3 +744,83 @@ footer.site-footer {
     color: #fff;
     box-shadow: 0 0 10px #ff2a85;
 }
+
+/* =========================================================
+   MINI GAME — Neon Pac-Man
+   ========================================================= */
+.game-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 380px;
+    margin: 0 auto 12px auto;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 0.95rem;
+    color: #fff;
+}
+
+#pac-score {
+    color: #00ffff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.9rem;
+}
+
+#pacman-canvas {
+    background: #0d061a;
+    border: 3px solid #ff2a85;
+    border-radius: 8px;
+    box-shadow: 0 0 18px -4px #ff2a85;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.pac-controls {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.pac-controls button {
+    background: #1a0b2e;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pac-controls button:hover,
+.pac-controls button:active {
+    background: #00ffff;
+    color: #0d061a;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+.pac-controls .reset-btn {
+    border-color: #ff2a85;
+    color: #ff2a85;
+}
+
+.pac-controls .reset-btn:hover {
+    background: #ff2a85;
+    color: #fff;
+    box-shadow: 0 0 10px #ff2a85;
+}
+
+.pac-controls .start-btn {
+    border-color: #00ffcc;
+    color: #00ffcc;
+}
+
+.pac-controls .start-btn:hover {
+    background: #00ffcc;
+    color: #0d061a;
+    box-shadow: 0 0 10px #00ffcc;
+}

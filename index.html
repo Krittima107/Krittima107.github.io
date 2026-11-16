@@ -89,11 +89,17 @@
             <canvas id="pacman-canvas" width="380" height="220"></canvas>
 
             <!-- ปุ่มควบคุมสำหรับหน้าจอมือถือ หรือใช้เมาส์คลิก -->
+            <!-- ปุ่มควบคุมสำหรับหน้าจอมือถือ หรือใช้เมาส์คลิก -->
             <div class="pac-controls">
                 <button type="button" onclick="movePac(0, -1)">▲</button>
                 <div>
                     <button type="button" onclick="movePac(-1, 0)">◀</button>
-                    <button type="button" onclick="resetPacGame()" class="reset-btn">RESET</button>
+
+                    <!-- เพิ่ม id ให้ปุ่มเพื่อใช้สลับการแสดงผล -->
+                    <button type="button" onclick="startPacGame()" id="pac-btn-start" class="start-btn">START</button>
+                    <button type="button" onclick="resetPacGame()" id="pac-btn-reset" class="reset-btn"
+                        style="display: none;">RESET</button>
+
                     <button type="button" onclick="movePac(1, 0)">▶</button>
                 </div>
                 <button type="button" onclick="movePac(0, 1)">▼</button>
@@ -112,8 +118,11 @@
             const scoreEl = document.getElementById('pac-score');
             const statusEl = document.getElementById('pac-status');
 
+            // ดึงปุ่มมาเตรียมไว้สำหรับสั่งซ่อน/แสดง
+            const btnStart = document.getElementById('pac-btn-start');
+            const btnReset = document.getElementById('pac-btn-reset');
+
             const tileSize = 20;
-            // แผนที่: 1 = กำแพง, 0 = จุดคะแนน, 2 = ทางว่าง
             const initialMap = [
                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
                 [1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
@@ -129,6 +138,8 @@
             ];
 
             let map, pacman, ghost, score, totalDots, gameOver, mouthOpen;
+            let gameStarted = false;
+            let ghostInterval;
 
             function initPacGame() {
                 map = initialMap.map(row => [...row]);
@@ -136,10 +147,17 @@
                 ghost = { x: 9, y: 5, dx: 0, dy: -1 };
                 score = 0;
                 gameOver = false;
+                gameStarted = false;
                 mouthOpen = true;
                 scoreEl.innerText = score;
-                statusEl.innerText = "ใช้ปุ่มลูกศร ⬆️⬇️⬅️➡️ หรือ WASD เพื่อเดิน";
-                statusEl.style.color = "#ffffff";
+                statusEl.innerText = "กด START เพื่อเริ่มเกม!";
+                statusEl.style.color = "#00ffcc";
+
+                // โชว์ปุ่ม START ซ่อนปุ่ม RESET
+                if (btnStart) btnStart.style.display = 'inline-block';
+                if (btnReset) btnReset.style.display = 'none';
+
+                clearInterval(ghostInterval);
 
                 totalDots = 0;
                 for (let r = 0; r < map.length; r++) {
@@ -150,8 +168,24 @@
                 drawPacGame();
             }
 
+            function startPacGame() {
+                if (gameStarted && !gameOver) return;
+
+                gameStarted = true;
+                statusEl.innerText = "ลุยเลย! ใช้ ⬆️⬇️⬅️➡️ เดิน";
+                statusEl.style.color = "#ffffff";
+
+                // ซ่อนปุ่ม START โชว์ปุ่ม RESET ทันทีที่เริ่มเล่น
+                if (btnStart) btnStart.style.display = 'none';
+                if (btnReset) btnReset.style.display = 'inline-block';
+
+                clearInterval(ghostInterval);
+                ghostInterval = setInterval(updateGhost, 450);
+            }
+
             function movePac(dx, dy) {
-                if (gameOver) return;
+                if (!gameStarted || gameOver) return;
+
                 const nextX = pacman.x + dx;
                 const nextY = pacman.y + dy;
 
@@ -160,13 +194,11 @@
                     pacman.y = nextY;
                     mouthOpen = !mouthOpen;
 
-                    // คำนวณทิศทางการหันหน้า
                     if (dx === 1) pacman.angle = 0;
                     if (dx === -1) pacman.angle = Math.PI;
                     if (dy === -1) pacman.angle = Math.PI * 1.5;
                     if (dy === 1) pacman.angle = Math.PI * 0.5;
 
-                    // เก็บจุด
                     if (map[nextY][nextX] === 0) {
                         map[nextY][nextX] = 2;
                         score += 10;
@@ -175,7 +207,8 @@
 
                         if (totalDots === 0) {
                             gameOver = true;
-                            statusEl.innerText = "🎉 YOU WIN! เก็บครบทุกจุดแล้ว!";
+                            clearInterval(ghostInterval);
+                            statusEl.innerText = "🎉 YOU WIN! กด RESET เพื่อเล่นใหม่";
                             statusEl.style.color = "#00ffcc";
                         }
                     }
@@ -185,15 +218,13 @@
             }
 
             function updateGhost() {
-                if (gameOver) return;
+                if (!gameStarted || gameOver) return;
+
                 const dirs = [
                     { dx: 0, dy: -1 }, { dx: 0, dy: 1 },
                     { dx: -1, dy: 0 }, { dx: 1, dy: 0 }
                 ];
-                // สุ่มทิศทางที่เดินได้ (ไม่ชนกำแพง)
                 const validDirs = dirs.filter(d => map[ghost.y + d.dy][ghost.x + d.dx] !== 1);
-
-                // พยายามไม่เดินย้อนกลับทางเดิมทันทีถ้ามีทางอื่น
                 const forwardDirs = validDirs.filter(d => !(d.dx === -ghost.dx && d.dy === -ghost.dy));
                 const chosen = (forwardDirs.length > 0 ? forwardDirs : validDirs)[Math.floor(Math.random() * (forwardDirs.length || validDirs.length))];
 
@@ -210,7 +241,8 @@
             function checkCollision() {
                 if (pacman.x === ghost.x && pacman.y === ghost.y) {
                     gameOver = true;
-                    statusEl.innerText = "💀 GAME OVER! โดนผีจับได้ กด RESET เพื่อเริ่มใหม่";
+                    clearInterval(ghostInterval);
+                    statusEl.innerText = "💀 GAME OVER! กด RESET เพื่อเริ่มใหม่";
                     statusEl.style.color = "#ff2a85";
                 }
             }
@@ -218,7 +250,6 @@
             function drawPacGame() {
                 ctx.clearRect(0, 0, pacCanvas.width, pacCanvas.height);
 
-                // วาดแผนที่และจุด
                 for (let r = 0; r < map.length; r++) {
                     for (let c = 0; c < map[r].length; c++) {
                         if (map[r][c] === 1) {
@@ -236,7 +267,6 @@
                     }
                 }
 
-                // วาดตัว Pac-Man (สีเหลืองนีออน)
                 ctx.save();
                 ctx.translate(pacman.x * tileSize + tileSize / 2, pacman.y * tileSize + tileSize / 2);
                 ctx.rotate(pacman.angle);
@@ -248,7 +278,6 @@
                 ctx.fill();
                 ctx.restore();
 
-                // วาดตัวผี (สีชมพูแสด)
                 const gx = ghost.x * tileSize + tileSize / 2;
                 const gy = ghost.y * tileSize + tileSize / 2;
                 ctx.fillStyle = '#ff0055';
@@ -259,7 +288,6 @@
                 ctx.closePath();
                 ctx.fill();
 
-                // ตาผี
                 ctx.fillStyle = '#ffffff';
                 ctx.beginPath();
                 ctx.arc(gx - 3, gy - 3, 2, 0, Math.PI * 2);
@@ -267,11 +295,15 @@
                 ctx.fill();
             }
 
-            // รับค่าจากแป้นพิมพ์
             window.addEventListener('keydown', (e) => {
                 if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                    e.preventDefault(); // ป้องกันหน้าเว็บเลื่อนขึ้นลงเวลาเล่น
+                    e.preventDefault();
                 }
+
+                if (!gameStarted && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(e.key.toLowerCase())) {
+                    startPacGame();
+                }
+
                 if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') movePac(0, -1);
                 if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') movePac(0, 1);
                 if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') movePac(-1, 0);
@@ -279,11 +311,10 @@
             });
 
             window.resetPacGame = initPacGame;
+            window.startPacGame = startPacGame;
             window.movePac = movePac;
 
             initPacGame();
-            // ให้ผีขยับทุกๆ 0.45 วินาที
-            setInterval(updateGhost, 450);
         }
     </script>
 
